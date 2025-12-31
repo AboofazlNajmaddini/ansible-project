@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  ansible-controller:
+    build: .
+    volumes:
+      - .:/ansible
+    command: tail -f /dev/null  
+
+  alma-target:
+    image: almalinux:9
+    command: tail -f /dev/null  
+    cap_add:
+      - SYS_ADMIN  
