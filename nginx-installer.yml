@@ -7,96 +7,135 @@
     - name: Clean up all repo files in yum.repos.d
       shell: rm -rf /etc/yum.repos.d/*.repo
 
-
-    - name: yumrepo Fama-server
+#BaseOS Repositories
+    - name: yumrepo_Fama-server_BaseOS
       yum_repository:
-        name: Fama-server
+        name: Fama-server_BaseOS
         description: Fama-server AlmaLinux 9 Repository
         baseurl:  https://repo.mirror.famaserver.com/almalinux/$releasever/BaseOS/x86_64/os/
         failovermethod: priority
         enabled: 1
         gpgcheck: 1
         gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
-    # - name: yumrepo appstream-iran
-    #   yum_repository:
-    #     name: appstream-iran
-    #     description: appstream-iran AlmaLinux 9 Repository
-    #     baseurl:  https://repo-portal.ito.gov.ir/repo/old_package/AlmaLinux/$releasever/BaseOS/x86_64/
-    #     failovermethod: priority
-    #     enabled: 1
-    #     gpgcheck: 1
-    #     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
-    - name: yumrepo host-baran
+    - name: yumrepo_host-baran_BaseOS
       yum_repository:
-        name: host-baran
+        name: host-baran_BaseOS
         description: host-baran AlmaLinux 9 Repository
         baseurl:  https://mirror.hostbaran.com/almalinux/$releasever/BaseOS/x86_64/os/
         failovermethod: priority
         enabled: 1
         gpgcheck: 1
         gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
-    - name: yumrepo pars-host
+    - name: yumrepo_pars-host_BaseOS
       yum_repository:
-        name: pars-host
+        name: pars-host_BaseOS
         description: pars-host AlmaLinux 9 Repository
         baseurl:  https://almalinux.pars.host/$releasever/BaseOS/x86_64/os/
         failovermethod: priority
         enabled: 1
         gpgcheck: 1
         gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
-    - name: yumrepo ito-gov
+    - name: yumrepo_aminDC_BaseOS
       yum_repository:
-        name: ito-gov
-        description: ito-gov AlmaLinux 9 Repository
-        baseurl:  https://archive.ito.gov.ir/almalinux/$releasever/BaseOS/x86_64/os/
-        failovermethod: priority
-        enabled: 1
-        gpgcheck: 1
-        gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
-    - name: yumrepo aminDC
-      yum_repository:
-        name: aminDC
+        name: aminDC_BaseOS
         description: aminDC AlmaLinux 9 Repository
         baseurl:  https://mirror.aminidc.com/almalinux/$releasever/BaseOS/x86_64/os/
         failovermethod: priority
         enabled: 1
         gpgcheck: 1
         gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
-    - name: yumrepo rootlicence
+    - name: yumrepo_rootlicence_BaseOS
       yum_repository:
-        name: rootlicence
+        name: rootlicence_BaseOS
         description: rootlicence AlmaLinux 9 Repository
         baseurl:  https://mirror.rootlicense.com/almalinux/$releasever/BaseOS/x86_64/os/
         failovermethod: priority
         enabled: 1
         gpgcheck: 1
         gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
-    - name: yumrepo sindad
+    - name: yumrepo_sindad_BaseOS
       yum_repository:
-        name: sindad
+        name: sindad_BaseOS
         description: sindad AlmaLinux 9 Repository
         baseurl:  https://ir.almalinux.sindad.cloud/$releasever/BaseOS/x86_64/os/
         failovermethod: priority
         enabled: 1
         gpgcheck: 1
         gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
-
-    - name: dnf clean all
+# AppStream Repositories
+    - name: yumrepo_Fama-server_AppStream
+      yum_repository:
+        name: Fama-server-AppStream
+        description: Fama-server AlmaLinux 9 Repository AppStream
+        baseurl:  https://repo.mirror.famaserver.com/almalinux/$releasever/AppStream/x86_64/os/
+        failovermethod: priority
+        enabled: 1
+        gpgcheck: 1
+        gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
+    - name: yumrepo_host-baran_AppStream
+      yum_repository:
+        name: host-baran-AppStream
+        description: host-baran AlmaLinux 9 Repository AppStream
+        baseurl:  https://mirror.hostbaran.com/almalinux/$releasever/AppStream/x86_64/os/
+        failovermethod: priority
+        enabled: 1
+        gpgcheck: 1
+        gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
+    - name: yumrepo_pars-host_AppStream
+      yum_repository:
+        name: pars-host_AppStream
+        description: pars-host AlmaLinux 9 Repository AppStream
+        baseurl:  https://almalinux.pars.host/$releasever/AppStream/x86_64/os/
+        failovermethod: priority
+        enabled: 1
+        gpgcheck: 1
+        gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
+    - name: yumrepo_aminDC_AppStream
+      yum_repository:
+        name: aminDC_AppStream
+        description: aminDC AlmaLinux 9 Repository AppStream
+        baseurl:  https://mirror.aminidc.com/almalinux/$releasever/AppStream/x86_64/os/
+        failovermethod: priority
+        enabled: 1
+        gpgcheck: 1
+        gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
+    - name: yumrepo_rootlicence_AppStream
+      yum_repository:
+        name: rootlicence_AppStream
+        description: rootlicence AlmaLinux 9 Repository AppStream
+        baseurl:  https://mirror.rootlicense.com/almalinux/$releasever/AppStream/x86_64/os/
+        failovermethod: priority
+        enabled: 1
+        gpgcheck: 1
+        gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
+    - name: yumrepo_sindad_AppStream
+      yum_repository:
+        name: sindad_AppStream
+        description: sindad AlmaLinux 9 Repository AppStream
+        baseurl:  https://ir.almalinux.sindad.cloud/$releasever/AppStream/x86_64/os/
+        failovermethod: priority
+        enabled: 1
+        gpgcheck: 1
+        gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
+    - name: Clear DNF cache
       command: dnf clean all
-
     - name: makecache with retries
       command: dnf makecache
       retries: 5
       delay: 10
       register: cache_result
       until: cache_result.rc == 0
+    - name: update
+      dnf:
+        name: '*'
+        state: latest
+        update_cache: yes
 
-    - name: Install nginx
+    - name: Install Nginx directly
       dnf:
         name: nginx
         state: present
-
-    - name: Start and enable nginx
+    - name: Start and enable nginx service
       service:
         name: nginx
         state: started
