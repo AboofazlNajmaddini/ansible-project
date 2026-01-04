@@ -1,2 +1,0 @@
-[targets]
-alma-target ansible_host=alma-target ansible_user=root ansible_ssh_pass=rootpassword ansible_become=yes
