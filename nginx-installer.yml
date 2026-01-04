@@ -62,7 +62,7 @@
         enabled: 1
         gpgcheck: 1
         gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
-        
+
 # AppStream Repositories
     - name: yumrepo_Fama-server_AppStream
       yum_repository:
@@ -118,6 +118,7 @@
         enabled: 1
         gpgcheck: 1
         gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
+        
     - name: Clear DNF cache
       command: dnf clean all
     - name: makecache with retries
@@ -126,6 +127,7 @@
       delay: 10
       register: cache_result
       until: cache_result.rc == 0
+
     - name: update
       dnf:
         name: '*'
@@ -141,3 +143,4 @@
         name: nginx
         state: started
         enabled: yes
+...
