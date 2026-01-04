@@ -4,39 +4,33 @@
   become: yes
 
   tasks:
-    - name: Remove existing iran-mirrors repo if present
-      file:
-        path: /etc/yum.repos.d/iran-mirrors.repo
-        state: absent
+    - name: Clean up all repo files in yum.repos.d
+      shell: rm -rf /etc/yum.repos.d/*.repo
 
-    - name: Install dnf-plugins-core
-      dnf:
-        name: dnf-plugins-core
-        state: present
 
     - name: yumrepo Fama-server
       yum_repository:
         name: Fama-server
         description: Fama-server AlmaLinux 9 Repository
-        baseurl:  https://repo.mirror.famaserver.com/almalinux/9/AppStream/x86_64/os/
+        baseurl:  https://repo.mirror.famaserver.com/almalinux/$releasever/BaseOS/x86_64/os/
         failovermethod: priority
         enabled: 1
         gpgcheck: 1
         gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
-    - name: yumrepo appstream-iran
-      yum_repository:
-        name: appstream-iran
-        description: appstream-iran AlmaLinux 9 Repository
-        baseurl:  https://repo-portal.ito.gov.ir/repo/old_package/AlmaLinux/9/AppStream/x86_64/
-        failovermethod: priority
-        enabled: 1
-        gpgcheck: 1
-        gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
+    # - name: yumrepo appstream-iran
+    #   yum_repository:
+    #     name: appstream-iran
+    #     description: appstream-iran AlmaLinux 9 Repository
+    #     baseurl:  https://repo-portal.ito.gov.ir/repo/old_package/AlmaLinux/$releasever/BaseOS/x86_64/
+    #     failovermethod: priority
+    #     enabled: 1
+    #     gpgcheck: 1
+    #     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
     - name: yumrepo host-baran
       yum_repository:
         name: host-baran
         description: host-baran AlmaLinux 9 Repository
-        baseurl:  https://mirror.hostbaran.com/almalinux/9/AppStream/x86_64/os/
+        baseurl:  https://mirror.hostbaran.com/almalinux/$releasever/BaseOS/x86_64/os/
         failovermethod: priority
         enabled: 1
         gpgcheck: 1
@@ -45,7 +39,7 @@
       yum_repository:
         name: pars-host
         description: pars-host AlmaLinux 9 Repository
-        baseurl:  https://almalinux.pars.host/9/AppStream/x86_64/os/
+        baseurl:  https://almalinux.pars.host/$releasever/BaseOS/x86_64/os/
         failovermethod: priority
         enabled: 1
         gpgcheck: 1
@@ -54,7 +48,7 @@
       yum_repository:
         name: ito-gov
         description: ito-gov AlmaLinux 9 Repository
-        baseurl:  https://archive.ito.gov.ir/almalinux/9/AppStream/x86_64/os/
+        baseurl:  https://archive.ito.gov.ir/almalinux/$releasever/BaseOS/x86_64/os/
         failovermethod: priority
         enabled: 1
         gpgcheck: 1
@@ -63,7 +57,7 @@
       yum_repository:
         name: aminDC
         description: aminDC AlmaLinux 9 Repository
-        baseurl:  https://mirror.aminidc.com/almalinux/9/AppStream/x86_64/os/
+        baseurl:  https://mirror.aminidc.com/almalinux/$releasever/BaseOS/x86_64/os/
         failovermethod: priority
         enabled: 1
         gpgcheck: 1
@@ -72,7 +66,7 @@
       yum_repository:
         name: rootlicence
         description: rootlicence AlmaLinux 9 Repository
-        baseurl:  https://mirror.rootlicense.com/almalinux/9/AppStream/x86_64/os/
+        baseurl:  https://mirror.rootlicense.com/almalinux/$releasever/BaseOS/x86_64/os/
         failovermethod: priority
         enabled: 1
         gpgcheck: 1
@@ -81,15 +75,11 @@
       yum_repository:
         name: sindad
         description: sindad AlmaLinux 9 Repository
-        baseurl:  https://ir.almalinux.sindad.cloud/9/AppStream/x86_64/os/
+        baseurl:  https://ir.almalinux.sindad.cloud/$releasever/BaseOS/x86_64/os/
         failovermethod: priority
         enabled: 1
         gpgcheck: 1
         gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
-
-    - name: Disable default almalinux repos
-      command: dnf config-manager --set-disabled almalinux* || true
-      ignore_errors: yes
 
     - name: dnf clean all
       command: dnf clean all

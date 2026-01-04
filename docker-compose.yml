@@ -4,7 +4,6 @@ services:
     container_name: ansible-controller
     volumes:
       - .:/ansible
-      # اشتراک‌گذاری سوکت داکر برای مدیریت کانتینرها بدون SSH
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - ansible-net
@@ -13,7 +12,6 @@ services:
   alma-target:
     image: almalinux:9
     container_name: alma-target
-    # اضافه کردن قابلیت‌های سیستمی برای نصب سرویس‌هایی مثل Nginx
     privileged: true
     cap_add:
       - SYS_ADMIN
