@@ -9,9 +9,18 @@ services:
       - ansible-net
     command: tail -f /dev/null
 
-  alma-target:
+  alma1-target:
     image: almalinux:9
-    container_name: alma-target
+    container_name: alma1-target
+    privileged: true
+    cap_add:
+      - SYS_ADMIN
+    networks:
+      - ansible-net
+    command: /usr/sbin/init
+  alma2-target:
+    image: almalinux:9
+    container_name: alma2-target
     privileged: true
     cap_add:
       - SYS_ADMIN
