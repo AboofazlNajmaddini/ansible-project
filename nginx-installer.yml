@@ -7,13 +7,17 @@
     - name: Clean up all repo files in yum.repos.d
       shell: rm -rf /etc/yum.repos.d/*.repo
 
-    - name: Adding Iranian Mirrors
+    - name: Create repository file using template
       template:
         src: jinja.j2
-        dest: ./almairan.repo
+        dest: /etc/yum.repos.d/almairan.repo
+        owner: root
+        group: root
+        mode: '0644'
         
     - name: Clear DNF cache
       command: dnf clean all
+
     - name: makecache with retries
       command: dnf makecache
       retries: 5

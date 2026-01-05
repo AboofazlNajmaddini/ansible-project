@@ -9,14 +9,16 @@
 
 {% for dir in ['BaseOS', 'AppStream'] %}
 {% for mirror_name, mirror_url in mirrors %}
-    - name: yumrepo-{{ mirror_name }}-{{ dir }}
-      yum_repository:
-        name: {{ mirror_name }}-{{ dir }}
-        description: {{ mirror_name }} AlmaLinux 9 Repository {{ dir }}
-        baseurl: {{ mirror_url }}$releasever/{{ dir }}/x86_64/os/
-        failovermethod: priority
-        enabled: 1
-        gpgcheck: 1
-        gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
+[yumrepo-{{ mirror_name }}-{{ dir }}]
+name={{ mirror_name }} AlmaLinux 9 Repository {{ dir }}
+baseurl={{ mirror_url }}$releasever/{{ dir }}/x86_64/os/
+failovermethod=priority
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux
+metadata_expire=86400
+retries=3
+timeout=10
+
 {% endfor %}
 {% endfor %}
