@@ -1,0 +1,34 @@
+---
+- name: Clean up all repo files
+  file:
+    path: /etc/yum.repos.d
+    state: directory
+    recurse: yes
+
+- name: Remove old repo files
+  shell: rm -f /etc/yum.repos.d/*.repo
+
+- name: Create Iranian AlmaLinux repo
+  template:
+    src: almairan.repo.j2
+    dest: /etc/yum.repos.d/almairan.repo
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Clean DNF cache
+  command: dnf clean all
+
+- name: Make cache with retries
+  command: dnf makecache
+  register: cache_result
+  retries: 5
+  delay: 10
+  until: cache_result.rc == 0
+
+- name: Update all packages
+  dnf:
+    name: "*"
+    state: latest
+    update_cache: yes
+...

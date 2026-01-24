@@ -1,0 +1,8 @@
+---
+- name: update system and install nginx
+  hosts: targets
+  become: yes
+  roles:
+  - system_update
+  - nginx_Installer
+...
