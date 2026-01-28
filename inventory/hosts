@@ -1,0 +1,3 @@
+[targets]
+alma1-target ansible_connection=docker ansible_user=root
+alma2-target ansible_connection=docker ansible_user=root
