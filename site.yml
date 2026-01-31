@@ -1,0 +1,9 @@
+---
+- name: Configure AlmaLinux with Iranian Mirrors and Install Nginx
+  hosts: targets
+  become: yes
+
+  roles:
+    - role: system_update
+    - role: nginx_Installer
+...
